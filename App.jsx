@@ -12,8 +12,9 @@ function handleTouchTap() {
 
 const muiTheme = getMuiTheme({
   appBar: {
-    color: '#fff',
+    color: '#f2f4f7',
     textColor: '#000',
+    height: 80,
   },
   tabs: {
   	backgroundColor: '#fff',
@@ -25,7 +26,7 @@ const muiTheme = getMuiTheme({
 const styles = {
 	title: {
 		cursor: 'pointer',
-		fontSize: 20,
+		fontSize: 30,
 		textAlign: 'center',
 	},
 	headline: {

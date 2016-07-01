@@ -15,10 +15,11 @@ const muiTheme = getMuiTheme({
     color: '#f2f4f7',
     textColor: '#000',
     height: 80,
+  },
   tabs: {
-  	backgroundColor: '#fff',
+  	backgroundColor: '#f2f4f7',
   	textColor: '#000',
-  	selectedTextColor: '#64b5f6',
+  	selectedTextColor: '#47bbbb',
   },
 });
 

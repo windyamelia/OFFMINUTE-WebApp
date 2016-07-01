@@ -1,0 +1,26 @@
+{
+  "name": "offminute-webapp",
+  "version": "1.0.0",
+  "description": "offminute web application",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidianindhita/Offminute-Webapp.git"
+  },
+  "keywords": [
+    "offminute"
+  ],
+  "author": "Offminute",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vidianindhita/Offminute-Webapp/issues"
+  },
+  "homepage": "https://github.com/vidianindhita/Offminute-Webapp#readme",
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  }
+}

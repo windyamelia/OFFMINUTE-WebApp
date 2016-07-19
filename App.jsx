@@ -15,6 +15,7 @@ const muiTheme = getMuiTheme({
     color: '#f2f4f7',
     textColor: '#000',
     height: 80,
+  },
   tabs: {
   	backgroundColor: '#fff',
   	textColor: '#000',

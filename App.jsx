@@ -38,12 +38,11 @@ const styles = {
 		marginBottom: 12,
 		fontWeight: 400,
 	},
-	slide: {
-		padding: 10,
-		height: 890,
-	},
 	tab: {
 		textTransform: 'capitalize',
+	},
+	cleardiv: {
+		clear: "both",
 	},
 	cuisine: {
 		backgroundColor: '#fff',
@@ -51,22 +50,48 @@ const styles = {
 		color: '#000',
 		fontSize: 40,
 		position: 'absolute',
-		left: 10,
-		top: 350,
+		top: 346,
 		zIndex: 100,
-		width: 720,
+		width: 950,
+		paddingLeft: 15,
+		paddingRight: 15,
+	},
+	cuisineTwo: {
+		backgroundColor: '#fff',
+		opacity: 0.5,
+		color: '#000',
+		fontSize: 40,
+		position: 'absolute',
+		top: 823,
+		zIndex: 100,
+		width: 950,
+		paddingLeft: 15,
+		paddingRight: 15,
+	},
+	cuisineThree: {
+		backgroundColor: '#fff',
+		opacity: 0.5,
+		color: '#000',
+		fontSize: 40,
+		position: 'absolute',
+		top: 1297,
+		zIndex: 100,
+		width: 950,
 		paddingLeft: 15,
 		paddingRight: 15,
 	},
 	li: {
-		display: "inline",
+		display: "inline-block",
 		listStyleType: "none",
 	},
 	sumRestaurant: {
 		float: 'right',
 		fontSize: 30,
-		display: "inline",
+		display: "inline-block",
 		listStyleType: "none",
+		verticalAlign: "middle",
+		marginTop: 8,
+		marginRight: 25,
 	},
 };
 
@@ -108,14 +133,34 @@ class App extends React.Component {
 			          index={this.state.slideIndex}
 			          onChangeIndex={this.handleChange}
 			        >
-			          <div style={styles.slide}>
-			            <img src={"images/western-menu.png"} />
-			            <div style={styles.cuisine}>
-			            	<ul>
-				            	<li style={styles.li}>Western</li>
-				            	<li style={styles.sumRestaurant}>20 Restaurant</li>
-			            	</ul>
-			            </div>
+			          <div>
+			          	<div>
+				            <img src={"images/western-menu.png"} />
+				            <div style={styles.cuisine}>
+				            	<ul>
+					            	<li style={styles.li}>Western</li>
+					            	<li style={styles.sumRestaurant}>20 Restaurants</li>
+				            	</ul>
+				            </div>
+				        </div>
+				        <div>
+				            <img src={"images/western-menu.png"} />
+				            <div style={styles.cuisineTwo}>
+				            	<ul>
+					            	<li style={styles.li}>Asian</li>
+					            	<li style={styles.sumRestaurant}>35 Restaurants</li>
+				            	</ul>
+				            </div>
+				        </div>
+				        <div>
+				            <img src={"images/western-menu.png"} />
+				            <div style={styles.cuisineThree}>
+				            	<ul>
+					            	<li style={styles.li}>Maxican</li>
+					            	<li style={styles.sumRestaurant}>19 Restaurants</li>
+				            	</ul>
+				            </div>
+				        </div>
 			          </div>
 			          <div style={styles.slide}>
 			            <img src={"images/test-image.jpg"} />

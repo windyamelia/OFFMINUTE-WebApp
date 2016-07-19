@@ -17,13 +17,16 @@ const muiTheme = getMuiTheme({
     height: 80,
   },
   tabs: {
-  	backgroundColor: '#fff',
+  	backgroundColor: '#f2f4f7',
   	textColor: '#000',
-  	selectedTextColor: '#64b5f6',
+  	selectedTextColor: '#47bbbb',
   },
 });
 
 const styles = {
+	appbar: {
+		boxShadow: 'none',
+	},
 	title: {
 		cursor: 'pointer',
 		fontSize: 30,
@@ -86,10 +89,11 @@ class App extends React.Component {
 		return (
 	      <MuiThemeProvider muiTheme={muiTheme}>
 	        <div>
-	        	<div>
+	        	<div style={styles.appbar}>
 			        <AppBar 
 			        	title={<div style={styles.title}>OFFMINUTE</div>}
-			        	onTitleTouchTap={handleTouchTap} />
+			        	onTitleTouchTap={handleTouchTap}
+			        	zDepth={0} />
 			    </div>
 		        <div>
 		        	<Tabs

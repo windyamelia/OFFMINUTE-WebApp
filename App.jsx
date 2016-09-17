@@ -6,7 +6,12 @@ import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
 import SearchIcon from 'material-ui/svg-icons/action/search';
+import LocationOn from 'material-ui/svg-icons/communication/location-on';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import AttachMoney from 'material-ui/svg-icons/editor/attach-money';
 
 function handleTouchTap() {
 	alert('touch on');
@@ -28,6 +33,7 @@ const muiTheme = getMuiTheme({
 const westernMenu = 'images/westernMenuEx.png'
 const asianMenu = 'images/asianMenuEx.png'
 const mexicanMenu = 'images/mexicanMenuEx.png'
+const popular1 = 'images/popular1.png'
 
 const styles = {
 	appbar: {
@@ -108,6 +114,81 @@ const styles = {
 		width: 100,
 		height: 100,
 	},
+	popular1: {
+		backgroundImage: 'url('+popular1+')',
+		backgroundSize: 'cover',
+		overflow: 'hidden',
+		height: 351,
+	},
+	ulCircleBanner: {
+		marginTop: 30,
+		float: 'right',
+	},
+	circleBanner: {
+		display: 'inline-block',
+		height: 90,
+		width: 90,
+		opacity: 0.8,
+		textAlign: 'center',
+		marginRight: 35,
+		backgroundColor: '#47bbbb',
+		borderRadius: 100 + '%',
+		color: '#fff',
+	},
+	percentage: {
+		fontSize: 28,
+		marginTop: 18,
+		marginBottom: 0,
+	},
+	timeDisc: {
+		fontSize: 12,
+		margin: 0,
+	},
+	banner: {
+		height: 124,
+		backgroundColor: '#fff',
+	},
+	bannerLeft: {
+		float: 'left',
+		marginLeft: 42,
+		color: '#000',
+	},
+	bannerRight: {
+		float: 'right',
+		marginRight: 42,
+		color: '#000',
+		textAlign: 'right',
+	},
+	grade: {
+		marginTop: 15,
+	},
+	bannerTitle: {
+		marginBottom: 0,
+		marginTop: 15,
+		fontSize: 28,
+		fontWeight: 400,
+	},
+	address: {
+		marginBottom: 0,
+		marginTop: 5,
+		fontSize: 20,
+		fontWeight: 100,
+	},
+	distance: {
+		marginBottom: 0,
+		marginTop: 5,
+		fontSize: 20,
+		fontWeight: 100,
+	},
+	wordSpace: {
+		fontSize: 20,
+	},
+	bannerButton: {
+		marginTop: 5,
+	},
+	favButton: {
+		borderRadius: 40,
+	},
 };
 
 class App extends React.Component {
@@ -150,9 +231,15 @@ class App extends React.Component {
 			          onChangeIndex={this.handleChange}
 			        >
 			          <div>
-			          	<FloatingActionButton mini={false} style={styles.searchButton} iconStyle={{width: '115px', height: '115px'}}>
-      						<SearchIcon />
-    					</FloatingActionButton>
+			          	<div>
+				          	<FloatingActionButton 
+				          		mini={false} 
+				          		style={styles.searchButton} 
+				          		iconStyle={{width: '90px', height: '90px'}} 
+				          		backgroundColor='#47bbbb'>
+	      						<SearchIcon />
+	    					</FloatingActionButton>
+	    				</div>
 			          	<div style={styles.cuisineType1}>
 				            <div style={styles.cuisine}>
 				            	<p style={styles.alignleft}>Western</p>
@@ -172,10 +259,141 @@ class App extends React.Component {
 				            </div>
 				        </div>
 			          </div>
-			          <div style={styles.slide}>
-			            <img src={"images/test-image.jpg"} />
+			          <div>
+			            <div>
+			            	<div style={styles.popular1}>
+			            		<ul style={styles.ulCircleBanner}>
+			            			<li style={styles.circleBanner}>
+					            		<p style={styles.percentage}>-20%</p>
+					            		<p style={styles.timeDisc}>15.00-20.00</p>
+					            	</li>
+					            	<li style={styles.circleBanner}>
+					            		<p style={styles.percentage}>-30%</p>
+					            		<p style={styles.timeDisc}>15.00-20.00</p>
+					            	</li>
+					            </ul>
+			            	</div>
+				            <div style={styles.banner}>
+				            	<div style={styles.bannerLeft}>
+				            		<h5 style={styles.bannerTitle}>Sushi Tei</h5>
+				            		<p style={styles.address}>Jl. Sumatera No. 1</p>
+				            		<FlatButton
+				            			label="1.54 km"
+				            			icon={<LocationOn />}
+				            			style={{marginLeft: -15}} />
+				            	</div>
+				            	<div style={styles.bannerRight}>
+				            		<div style={styles.grade}>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            	</div>
+					            	<div>
+					            		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
+					            		<span style={styles.wordSpace} id="greyMoney">$ $ $</span>
+					            	</div>
+					            	<div style={styles.bannerButton}>
+					            		<FlatButton
+					            			backgroundColor="#ed5564"
+					            			label="Add to Favorite"
+					            			style={styles.favButton}
+					            			labelStyle={{color: '#fff', textTransform: 'capitalize', fontWeight: 100}} />
+					            	</div>
+				            	</div>
+				            </div>
+				        </div>
+				        <div>
+			            	<div style={styles.popular1}>
+			            		<ul style={styles.ulCircleBanner}>
+			            			<li style={styles.circleBanner}>
+					            		<p style={styles.percentage}>-20%</p>
+					            		<p style={styles.timeDisc}>15.00-20.00</p>
+					            	</li>
+					            	<li style={styles.circleBanner}>
+					            		<p style={styles.percentage}>-30%</p>
+					            		<p style={styles.timeDisc}>15.00-20.00</p>
+					            	</li>
+					            </ul>
+			            	</div>
+				            <div style={styles.banner}>
+				            	<div style={styles.bannerLeft}>
+				            		<h5 style={styles.bannerTitle}>Sushi Tei</h5>
+				            		<p style={styles.address}>Jl. Sumatera No. 1</p>
+				            		<FlatButton
+				            			label="1.54 km"
+				            			icon={<LocationOn />}
+				            			style={{marginLeft: -15}} />
+				            	</div>
+				            	<div style={styles.bannerRight}>
+				            		<div style={styles.grade}>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            	</div>
+					            	<div>
+					            		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
+					            		<span style={styles.wordSpace} id="greyMoney">$ $ $</span>
+					            	</div>
+					            	<div style={styles.bannerButton}>
+					            		<FlatButton
+					            			backgroundColor="#ed5564"
+					            			label="Add to Favorite"
+					            			style={styles.favButton}
+					            			labelStyle={{color: '#fff', textTransform: 'capitalize', fontWeight: 100}} />
+					            	</div>
+				            	</div>
+				            </div>
+				        </div>
+				        <div>
+			            	<div style={styles.popular1}>
+			            		<ul style={styles.ulCircleBanner}>
+			            			<li style={styles.circleBanner}>
+					            		<p style={styles.percentage}>-20%</p>
+					            		<p style={styles.timeDisc}>15.00-20.00</p>
+					            	</li>
+					            	<li style={styles.circleBanner}>
+					            		<p style={styles.percentage}>-30%</p>
+					            		<p style={styles.timeDisc}>15.00-20.00</p>
+					            	</li>
+					            </ul>
+			            	</div>
+				            <div style={styles.banner}>
+				            	<div style={styles.bannerLeft}>
+				            		<h5 style={styles.bannerTitle}>Sushi Tei</h5>
+				            		<p style={styles.address}>Jl. Sumatera No. 1</p>
+				            		<FlatButton
+				            			label="1.54 km"
+				            			icon={<LocationOn />}
+				            			style={{marginLeft: -15}} />
+				            	</div>
+				            	<div style={styles.bannerRight}>
+				            		<div style={styles.grade}>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade color={'#00bebe'}/>
+					            	</div>
+					            	<div>
+					            		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
+					            		<span style={styles.wordSpace} id="greyMoney">$ $ $</span>
+					            	</div>
+					            	<div style={styles.bannerButton}>
+					            		<FlatButton
+					            			backgroundColor="#ed5564"
+					            			label="Add to Favorite"
+					            			style={styles.favButton}
+					            			labelStyle={{color: '#fff', textTransform: 'capitalize', fontWeight: 100}} />
+					            	</div>
+				            	</div>
+				            </div>
+				        </div>
 			          </div>
-			          <div style={styles.slide}>
+			          <div>
 			            slide n°3
 			          </div>
 			        </SwipeableViews>

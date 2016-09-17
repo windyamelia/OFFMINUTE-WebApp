@@ -5,3 +5,12 @@ html {
 body {
 	margin: 0;
 }
+
+#blueMoney {
+	color: #47bbbb;
+}
+
+#greyMoney {
+	color: #696d6f;
+	margin-right: 5px;
+}

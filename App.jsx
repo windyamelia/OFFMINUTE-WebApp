@@ -5,6 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import SearchIcon from 'material-ui/svg-icons/action/search';
 
 function handleTouchTap() {
 	alert('touch on');
@@ -23,6 +25,10 @@ const muiTheme = getMuiTheme({
   },
 });
 
+const westernMenu = 'images/westernMenuEx.png'
+const asianMenu = 'images/asianMenuEx.png'
+const mexicanMenu = 'images/mexicanMenuEx.png'
+
 const styles = {
 	appbar: {
 		boxShadow: 'none',
@@ -31,6 +37,9 @@ const styles = {
 		cursor: 'pointer',
 		fontSize: 30,
 		textAlign: 'center',
+	},
+	rightIcon: {
+		marginRight: 38,
 	},
 	headline: {
 		fontSize: 24,
@@ -44,54 +53,60 @@ const styles = {
 	cleardiv: {
 		clear: "both",
 	},
+	cuisineType1: {
+		backgroundImage: 'url('+westernMenu+')',
+		backgroundSize: 'cover',
+		overflow: 'hidden',
+		height: 470,
+	},
+	cuisineType2: {
+		backgroundImage: 'url('+asianMenu+')',
+		backgroundSize: 'cover',
+		overflow: 'hidden',
+		height: 470,
+	},
+	cuisineType3: {
+		backgroundImage: 'url('+mexicanMenu+')',
+		backgroundSize: 'cover',
+		overflow: 'hidden',
+		height: 470,
+	},
 	cuisine: {
+		height: 136,
 		backgroundColor: '#fff',
-		opacity: 0.5,
+		opacity: 0.8,
+		marginTop: 335, 
+	},
+	alignleft: {
+		float: 'left',
+		marginLeft: 42,
 		color: '#000',
-		fontSize: 40,
-		position: 'absolute',
-		top: 346,
-		zIndex: 100,
-		width: 950,
-		paddingLeft: 15,
-		paddingRight: 15,
+		fontSize: 42,
+		fontWeight: 100,
 	},
-	cuisineTwo: {
-		backgroundColor: '#fff',
-		opacity: 0.5,
-		color: '#000',
-		fontSize: 40,
-		position: 'absolute',
-		top: 823,
-		zIndex: 100,
-		width: 950,
-		paddingLeft: 15,
-		paddingRight: 15,
-	},
-	cuisineThree: {
-		backgroundColor: '#fff',
-		opacity: 0.5,
-		color: '#000',
-		fontSize: 40,
-		position: 'absolute',
-		top: 1297,
-		zIndex: 100,
-		width: 950,
-		paddingLeft: 15,
-		paddingRight: 15,
-	},
-	li: {
-		display: "inline-block",
-		listStyleType: "none",
-	},
-	sumRestaurant: {
+	alignright: {
 		float: 'right',
-		fontSize: 30,
-		display: "inline-block",
-		listStyleType: "none",
-		verticalAlign: "middle",
-		marginTop: 8,
-		marginRight: 25,
+		marginRight: 42,
+		color: '#000',
+		fontSize: 32,
+		verticalAlign: 'middle',
+		marginTop: 52,
+		fontWeight: 100,
+	},
+	searchButton: {
+		margin: 0,
+	    top: 'auto',
+	    right: 42,
+	    bottom: 60,
+	    left: 'auto',
+	    position: 'absolute',
+	    zIndex: 1000,
+	    padding: 30,
+	    backgroundColor: '#47bbbb',
+	},
+	searchButtonIcon: {
+		width: 100,
+		height: 100,
 	},
 };
 
@@ -118,7 +133,8 @@ class App extends React.Component {
 			        <AppBar 
 			        	title={<div style={styles.title}>OFFMINUTE</div>}
 			        	onTitleTouchTap={handleTouchTap}
-			        	zDepth={0} />
+			        	zDepth={0}
+			        	iconElementRight={<img src={"images/icon/rightIcon.png"} style={styles.rightIcon} />} />
 			    </div>
 		        <div>
 		        	<Tabs
@@ -134,31 +150,25 @@ class App extends React.Component {
 			          onChangeIndex={this.handleChange}
 			        >
 			          <div>
-			          	<div>
-				            <img src={"images/western-menu.png"} />
+			          	<FloatingActionButton mini={false} style={styles.searchButton} iconStyle={{width: '115px', height: '115px'}}>
+      						<SearchIcon />
+    					</FloatingActionButton>
+			          	<div style={styles.cuisineType1}>
 				            <div style={styles.cuisine}>
-				            	<ul>
-					            	<li style={styles.li}>Western</li>
-					            	<li style={styles.sumRestaurant}>20 Restaurants</li>
-				            	</ul>
+				            	<p style={styles.alignleft}>Western</p>
+				            	<p style={styles.alignright}>20 Restaurants</p>
 				            </div>
 				        </div>
-				        <div>
-				            <img src={"images/western-menu.png"} />
-				            <div style={styles.cuisineTwo}>
-				            	<ul>
-					            	<li style={styles.li}>Asian</li>
-					            	<li style={styles.sumRestaurant}>35 Restaurants</li>
-				            	</ul>
+				        <div style={styles.cuisineType2}>
+				            <div style={styles.cuisine}>
+				            	<p style={styles.alignleft}>Asian</p>
+				            	<p style={styles.alignright}>35 Restaurants</p>
 				            </div>
 				        </div>
-				        <div>
-				            <img src={"images/western-menu.png"} />
-				            <div style={styles.cuisineThree}>
-				            	<ul>
-					            	<li style={styles.li}>Maxican</li>
-					            	<li style={styles.sumRestaurant}>19 Restaurants</li>
-				            	</ul>
+				        <div style={styles.cuisineType3}>
+				            <div style={styles.cuisine}>
+				            	<p style={styles.alignleft}>Mexican</p>
+				            	<p style={styles.alignright}>19 Restaurants</p>
 				            </div>
 				        </div>
 			          </div>

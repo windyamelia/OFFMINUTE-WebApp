@@ -4,6 +4,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import getStyles from 'material-ui/Tabs/Tab';
 import SwipeableViews from 'react-swipeable-views';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -55,6 +56,7 @@ const styles = {
 	},
 	tab: {
 		textTransform: 'capitalize',
+		fontSize: 32,
 	},
 	cleardiv: {
 		clear: "both",
@@ -206,6 +208,14 @@ class App extends React.Component {
 		});
 	}
 
+	get styles() {
+		return {
+			button: {
+				height: 120,
+			},
+		};
+	}
+
 	render() {
 		return (
 	      <MuiThemeProvider muiTheme={muiTheme}>
@@ -222,9 +232,9 @@ class App extends React.Component {
 			          onChange={this.handleChange}
 			          value={this.state.slideIndex}
 			        >
-			          <Tab label={<span style={styles.tab}>Explore</span>} value={0} />
-			          <Tab label={<span style={styles.tab}>Popular</span>} value={1} />
-			          <Tab label={<span style={styles.tab}>Favorite</span>} value={2} />
+			          <Tab style={this.styles.button} label={<span style={styles.tab}>Explore</span>} value={0} />
+			          <Tab style={this.styles.button} label={<span style={styles.tab}>Popular</span>} value={1} />
+			          <Tab style={this.styles.button} label={<span style={styles.tab}>Favorite</span>} value={2} />
 			        </Tabs>
 			        <SwipeableViews
 			          index={this.state.slideIndex}
@@ -250,6 +260,12 @@ class App extends React.Component {
 				            <div style={styles.cuisine}>
 				            	<p style={styles.alignleft}>Asian</p>
 				            	<p style={styles.alignright}>35 Restaurants</p>
+				            </div>
+				        </div>
+				        <div style={styles.cuisineType3}>
+				            <div style={styles.cuisine}>
+				            	<p style={styles.alignleft}>Mexican</p>
+				            	<p style={styles.alignright}>19 Restaurants</p>
 				            </div>
 				        </div>
 				        <div style={styles.cuisineType3}>

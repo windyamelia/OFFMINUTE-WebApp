@@ -4,6 +4,19 @@ html {
 
 body {
 	margin: 0;
+	padding: 0;
+}
+
+/* Grid List */
+.titleGridTile {
+	color: #000;
+	font-size: 20px;
+	font-weight: 100;
+}
+
+.titleRight {
+	font-size: 14px;
+	margin-right: 18px;
 }
 
 #blueMoney {

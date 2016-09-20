@@ -1,14 +1,17 @@
 import React from 'react';
-// import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import { StickyContainer, Sticky } from 'react-sticky';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import getStyles from 'material-ui/Tabs/Tab';
+import {GridList, GridTile} from 'material-ui/GridList';
 import SwipeableViews from 'react-swipeable-views';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import LocationOn from 'material-ui/svg-icons/communication/location-on';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
@@ -22,7 +25,7 @@ const muiTheme = getMuiTheme({
   appBar: {
     color: '#f2f4f7',
     textColor: '#000',
-    height: 80,
+    height: 60,
   },
   tabs: {
   	backgroundColor: '#f2f4f7',
@@ -36,17 +39,40 @@ const asianMenu = 'images/asianMenuEx.png'
 const mexicanMenu = 'images/mexicanMenuEx.png'
 const popular1 = 'images/popular1.png'
 
+const tilesData = [
+  {
+    img: 'images/westernMenuEx.png',
+    cuisine: 'Western',
+    sumRestaurant: '19 Restaurants',
+  },
+  {
+    img: 'images/asianMenuEx.png',
+    cuisine: 'Asian',
+    sumRestaurant: '19 Restaurants',
+  },
+  {
+    img: 'images/mexicanMenuEx.png',
+    cuisine: 'Mexican',
+    sumRestaurant: '19 Restaurants',
+  },
+];
+
 const styles = {
+	sticky: {
+		zIndex: 1000,
+	},
 	appbar: {
 		boxShadow: 'none',
 	},
 	title: {
 		cursor: 'pointer',
-		fontSize: 30,
+		fontSize: 15,
 		textAlign: 'center',
 	},
 	rightIcon: {
-		marginRight: 38,
+		margin: '6px 8px 0px -16px',
+		padding: 12,
+		boxSizing: 'border-box',
 	},
 	headline: {
 		fontSize: 24,
@@ -56,140 +82,122 @@ const styles = {
 	},
 	tab: {
 		textTransform: 'capitalize',
-		fontSize: 32,
+		fontSize: 16,
+		fontWeight: 400,
 	},
 	cleardiv: {
 		clear: "both",
 	},
-	cuisineType1: {
-		backgroundImage: 'url('+westernMenu+')',
-		backgroundSize: 'cover',
-		overflow: 'hidden',
-		height: 470,
+	cuisineCustom: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
 	},
-	cuisineType2: {
-		backgroundImage: 'url('+asianMenu+')',
-		backgroundSize: 'cover',
-		overflow: 'hidden',
-		height: 470,
-	},
-	cuisineType3: {
-		backgroundImage: 'url('+mexicanMenu+')',
-		backgroundSize: 'cover',
-		overflow: 'hidden',
-		height: 470,
-	},
-	cuisine: {
-		height: 136,
-		backgroundColor: '#fff',
-		opacity: 0.8,
-		marginTop: 335, 
-	},
-	alignleft: {
-		float: 'left',
-		marginLeft: 42,
-		color: '#000',
-		fontSize: 42,
-		fontWeight: 100,
-	},
-	alignright: {
-		float: 'right',
-		marginRight: 42,
-		color: '#000',
-		fontSize: 32,
-		verticalAlign: 'middle',
-		marginTop: 52,
-		fontWeight: 100,
+	gridList: {
+		width: 480,
+	    overflowY: 'auto',
 	},
 	searchButton: {
+		display: 'flex',
 		margin: 0,
 	    top: 'auto',
-	    right: 42,
-	    bottom: 60,
+	    right: 20,
+	    bottom: 20,
 	    left: 'auto',
-	    position: 'absolute',
-	    zIndex: 1000,
-	    padding: 30,
+	    position: 'fixed',
+	    zIndex: 500,
 	    backgroundColor: '#47bbbb',
 	},
-	searchButtonIcon: {
-		width: 100,
-		height: 100,
+	popularCustom: {
+		margin: '0 auto',
+		maxWidth: 480,
 	},
 	popular1: {
 		backgroundImage: 'url('+popular1+')',
-		backgroundSize: 'cover',
 		overflow: 'hidden',
-		height: 351,
+		backgroundSize: 'cover',
+		height: 170,
+		maxWidth: 480,
+		textAlign: 'center',
 	},
 	ulCircleBanner: {
-		marginTop: 30,
+		marginTop: 12,
 		float: 'right',
 	},
 	circleBanner: {
 		display: 'inline-block',
-		height: 90,
-		width: 90,
+		height: 52,
+		width: 52,
 		opacity: 0.8,
 		textAlign: 'center',
-		marginRight: 35,
+		marginRight: 18,
 		backgroundColor: '#47bbbb',
 		borderRadius: 100 + '%',
 		color: '#fff',
 	},
 	percentage: {
-		fontSize: 28,
-		marginTop: 18,
+		fontSize: 16,
+		marginTop: 10,
 		marginBottom: 0,
 	},
 	timeDisc: {
-		fontSize: 12,
+		fontSize: 8,
 		margin: 0,
 	},
 	banner: {
-		height: 124,
+		height: 86,
 		backgroundColor: '#fff',
+		maxWidth: 480,
+		margin: '6px 0',
 	},
 	bannerLeft: {
 		float: 'left',
-		marginLeft: 42,
+		marginLeft: 20,
 		color: '#000',
 	},
 	bannerRight: {
 		float: 'right',
-		marginRight: 42,
+		marginRight: 20,
 		color: '#000',
 		textAlign: 'right',
 	},
-	grade: {
-		marginTop: 15,
+	starIcon: {
+		width: 20,
+		height: 20,
 	},
 	bannerTitle: {
+		marginTop: 0,
 		marginBottom: 0,
-		marginTop: 15,
-		fontSize: 28,
+		fontSize: 20,
 		fontWeight: 400,
 	},
 	address: {
 		marginBottom: 0,
-		marginTop: 5,
-		fontSize: 20,
+		marginTop: 4,
+		fontSize: 14,
 		fontWeight: 100,
 	},
 	distance: {
 		marginBottom: 0,
-		marginTop: 5,
-		fontSize: 20,
+		fontSize: 14,
 		fontWeight: 100,
+		padding: 0,
 	},
 	wordSpace: {
-		fontSize: 20,
+		fontSize: 14,
 	},
 	bannerButton: {
-		marginTop: 5,
+		marginTop: 4,
 	},
 	favButton: {
 		borderRadius: 40,
+		height: 34,
+	},
+	labelFavButton: {
+		color: '#fff', 
+		textTransform: 'capitalize', 
+		fontWeight: 100, 
+		fontSize: 14,
 	},
 };
 
@@ -200,6 +208,18 @@ class App extends React.Component {
 		this.state = {
 			slideIndex: 0,
 		};
+
+		this.handleMenuToggle = this.handleMenuToggle.bind(this);
+		this.state = {
+			open: false,
+		};
+		this.handleMenuClose = this.handleMenuClose.bind(this);
+
+		this.handleSearchToggle = this.handleSearchToggle.bind(this);
+		this.state = {
+			open: false,
+		};
+		this.handleSearchClose = this.handleSearchClose.bind(this);
 	}
 
 	handleChange(value) {
@@ -208,75 +228,88 @@ class App extends React.Component {
 		});
 	}
 
-	get styles() {
-		return {
-			button: {
-				height: 120,
-			},
-		};
+	handleMenuToggle() {
+		this.setState({
+			open: !this.state.open,
+		});
+	}
+
+	handleMenuClose() {
+		this.setState({
+			open: false,
+		});
+	}
+
+	handleSearchToggle() {
+		this.setState({
+			open: !this.state.open,
+		});
+	}
+
+	handleSearchClose() {
+		this.setState({
+			open: false,
+		});
 	}
 
 	render() {
 		return (
 	      <MuiThemeProvider muiTheme={muiTheme}>
 	        <div>
-	        	<div style={styles.appbar}>
-			        <AppBar 
-			        	title={<div style={styles.title}>OFFMINUTE</div>}
-			        	onTitleTouchTap={handleTouchTap}
-			        	zDepth={0}
-			        	iconElementRight={<img src={"images/icon/rightIcon.png"} style={styles.rightIcon} />} />
-			    </div>
-		        <div>
-		        	<Tabs
-			          onChange={this.handleChange}
-			          value={this.state.slideIndex}
-			        >
-			          <Tab style={this.styles.button} label={<span style={styles.tab}>Explore</span>} value={0} />
-			          <Tab style={this.styles.button} label={<span style={styles.tab}>Popular</span>} value={1} />
-			          <Tab style={this.styles.button} label={<span style={styles.tab}>Favorite</span>} value={2} />
-			        </Tabs>
+	        	<StickyContainer>
+	        		
+			        	<div style={styles.appbar}>
+					        <AppBar 
+					        	title={<div style={styles.title}>OFFMINUTE</div>}
+					        	onTitleTouchTap={handleTouchTap}
+					        	onLeftIconButtonTouchTap={this.handleMenuToggle}
+					        	zDepth={0}
+					        	iconElementRight={<img src={"images/icon/rightIcon.png"} style={styles.rightIcon} />} />
+					    </div>
+					<Sticky style={styles.sticky}>
+			        	<Tabs
+				          onChange={this.handleChange}
+				          value={this.state.slideIndex}
+				        >
+				          <Tab label={<span style={styles.tab}>Explore</span>} value={0} />
+				          <Tab label={<span style={styles.tab}>Popular</span>} value={1} />
+				          <Tab label={<span style={styles.tab}>Favorite</span>} value={2} />
+			        	</Tabs>
+			        </Sticky>
 			        <SwipeableViews
 			          index={this.state.slideIndex}
 			          onChangeIndex={this.handleChange}
 			        >
 			          <div>
-			          	<div>
-				          	<FloatingActionButton 
-				          		mini={false} 
-				          		style={styles.searchButton} 
-				          		iconStyle={{width: '90px', height: '90px'}} 
-				          		backgroundColor='#47bbbb'>
-	      						<SearchIcon />
-	    					</FloatingActionButton>
-	    				</div>
-			          	<div style={styles.cuisineType1}>
-				            <div style={styles.cuisine}>
-				            	<p style={styles.alignleft}>Western</p>
-				            	<p style={styles.alignright}>20 Restaurants</p>
-				            </div>
-				        </div>
-				        <div style={styles.cuisineType2}>
-				            <div style={styles.cuisine}>
-				            	<p style={styles.alignleft}>Asian</p>
-				            	<p style={styles.alignright}>35 Restaurants</p>
-				            </div>
-				        </div>
-				        <div style={styles.cuisineType3}>
-				            <div style={styles.cuisine}>
-				            	<p style={styles.alignleft}>Mexican</p>
-				            	<p style={styles.alignright}>19 Restaurants</p>
-				            </div>
-				        </div>
-				        <div style={styles.cuisineType3}>
-				            <div style={styles.cuisine}>
-				            	<p style={styles.alignleft}>Mexican</p>
-				            	<p style={styles.alignright}>19 Restaurants</p>
-				            </div>
-				        </div>
+				        <FloatingActionButton 
+				        	mini={false} 
+				        	style={styles.searchButton}  
+				        	backgroundColor='#47bbbb'
+				        	onTouchTap={this.handleSearchToggle}>
+	      					<SearchIcon />
+	    				</FloatingActionButton>
+			          	<div style={styles.cuisineCustom}>
+			          		<GridList
+			          			cols={1}
+			          			cellHeight={228}
+			          			padding={0}
+			          			style={styles.gridList}
+			          		>
+			          			{tilesData.map((tile) => (
+			          			<GridTile
+			          				key={tile.img}
+			          				title={<span className="titleGridTile">{tile.cuisine}</span>}
+			          				titleBackground='rgba(255, 255, 255, 0.8)'
+			          				actionIcon={<span className="titleGridTile titleRight">{tile.sumRestaurant}</span>}
+			          			>
+			          				<img src={tile.img} />
+			          			</GridTile>
+			          			))}
+			          		</GridList>
+			          	</div>
 			          </div>
 			          <div>
-			            <div>
+			          	<div style={styles.popularCustom}>
 			            	<div style={styles.popular1}>
 			            		<ul style={styles.ulCircleBanner}>
 			            			<li style={styles.circleBanner}>
@@ -295,16 +328,17 @@ class App extends React.Component {
 				            		<p style={styles.address}>Jl. Sumatera No. 1</p>
 				            		<FlatButton
 				            			label="1.54 km"
+				            			labelStyle={styles.distance}
 				            			icon={<LocationOn />}
 				            			style={{marginLeft: -15}} />
 				            	</div>
 				            	<div style={styles.bannerRight}>
 				            		<div style={styles.grade}>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
 					            	</div>
 					            	<div>
 					            		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
@@ -315,12 +349,12 @@ class App extends React.Component {
 					            			backgroundColor="#ed5564"
 					            			label="Add to Favorite"
 					            			style={styles.favButton}
-					            			labelStyle={{color: '#fff', textTransform: 'capitalize', fontWeight: 100}} />
+					            			labelStyle={styles.labelFavButton} />
 					            	</div>
 				            	</div>
 				            </div>
 				        </div>
-				        <div>
+				        <div style={styles.popularCustom}>
 			            	<div style={styles.popular1}>
 			            		<ul style={styles.ulCircleBanner}>
 			            			<li style={styles.circleBanner}>
@@ -339,16 +373,17 @@ class App extends React.Component {
 				            		<p style={styles.address}>Jl. Sumatera No. 1</p>
 				            		<FlatButton
 				            			label="1.54 km"
+				            			labelStyle={styles.distance}
 				            			icon={<LocationOn />}
 				            			style={{marginLeft: -15}} />
 				            	</div>
 				            	<div style={styles.bannerRight}>
 				            		<div style={styles.grade}>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
 					            	</div>
 					            	<div>
 					            		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
@@ -359,12 +394,12 @@ class App extends React.Component {
 					            			backgroundColor="#ed5564"
 					            			label="Add to Favorite"
 					            			style={styles.favButton}
-					            			labelStyle={{color: '#fff', textTransform: 'capitalize', fontWeight: 100}} />
+					            			labelStyle={styles.labelFavButton} />
 					            	</div>
 				            	</div>
 				            </div>
 				        </div>
-				        <div>
+				        <div style={styles.popularCustom}>
 			            	<div style={styles.popular1}>
 			            		<ul style={styles.ulCircleBanner}>
 			            			<li style={styles.circleBanner}>
@@ -383,16 +418,17 @@ class App extends React.Component {
 				            		<p style={styles.address}>Jl. Sumatera No. 1</p>
 				            		<FlatButton
 				            			label="1.54 km"
+				            			labelStyle={styles.distance}
 				            			icon={<LocationOn />}
 				            			style={{marginLeft: -15}} />
 				            	</div>
 				            	<div style={styles.bannerRight}>
 				            		<div style={styles.grade}>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
-					            		<ActionGrade color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon}  color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+					            		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
 					            	</div>
 					            	<div>
 					            		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
@@ -403,7 +439,7 @@ class App extends React.Component {
 					            			backgroundColor="#ed5564"
 					            			label="Add to Favorite"
 					            			style={styles.favButton}
-					            			labelStyle={{color: '#fff', textTransform: 'capitalize', fontWeight: 100}} />
+					            			labelStyle={styles.labelFavButton} />
 					            	</div>
 				            	</div>
 				            </div>
@@ -413,7 +449,34 @@ class App extends React.Component {
 			            slide n°3
 			          </div>
 			        </SwipeableViews>
-		        </div>
+			        <Drawer
+					    docked={false}
+					    width={200}
+					    zDepth={5}
+					    open={this.state.open}
+					    onRequestChange={(open) => this.handleMenuClose()}
+					>
+						<MenuItem onTouchTap={this.handleMenuClose}></MenuItem>
+						<MenuItem onTouchTap={this.handleMenuClose}>My account</MenuItem>
+						<MenuItem onTouchTap={this.handleMenuClose}>Term and condition</MenuItem>
+						<MenuItem onTouchTap={this.handleMenuClose}>Help</MenuItem>
+						<MenuItem onTouchTap={this.handleMenuClose}>Settings</MenuItem>
+					</Drawer>
+
+					<Drawer
+					    docked={false}
+					    width={200}
+					    zDepth={5}
+					    open={this.state.open}
+					    onRequestChange={(open) => this.handleSearchClose()}
+					>
+						<MenuItem onTouchTap={this.handleSearchClose}></MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>test</MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>test 2</MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>Help</MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>Settings</MenuItem>
+					</Drawer>
+		        </StickyContainer>
 	        </div>
 	      </MuiThemeProvider>
 	    );

@@ -11,6 +11,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import Drawer from 'material-ui/Drawer';
+import Subheader from 'material-ui/Subheader';
 import MenuItem from 'material-ui/MenuItem';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import LocationOn from 'material-ui/svg-icons/communication/location-on';
@@ -199,6 +200,9 @@ const styles = {
 		fontWeight: 100, 
 		fontSize: 14,
 	},
+	subheaderSearch: {
+		textAlign: 'center',
+	},
 };
 
 class App extends React.Component {
@@ -214,12 +218,6 @@ class App extends React.Component {
 			open: false,
 		};
 		this.handleMenuClose = this.handleMenuClose.bind(this);
-
-		this.handleSearchToggle = this.handleSearchToggle.bind(this);
-		this.state = {
-			open: false,
-		};
-		this.handleSearchClose = this.handleSearchClose.bind(this);
 	}
 
 	handleChange(value) {
@@ -240,18 +238,6 @@ class App extends React.Component {
 		});
 	}
 
-	handleSearchToggle() {
-		this.setState({
-			open: !this.state.open,
-		});
-	}
-
-	handleSearchClose() {
-		this.setState({
-			open: false,
-		});
-	}
-
 	render() {
 		return (
 	      <MuiThemeProvider muiTheme={muiTheme}>
@@ -265,6 +251,7 @@ class App extends React.Component {
 					        	onLeftIconButtonTouchTap={this.handleMenuToggle}
 					        	zDepth={0}
 					        	iconElementRight={<img src={"images/icon/rightIcon.png"} style={styles.rightIcon} />} />
+					        <DrawerSearch />
 					    </div>
 					<Sticky style={styles.sticky}>
 			        	<Tabs
@@ -281,13 +268,6 @@ class App extends React.Component {
 			          onChangeIndex={this.handleChange}
 			        >
 			          <div>
-				        <FloatingActionButton 
-				        	mini={false} 
-				        	style={styles.searchButton}  
-				        	backgroundColor='#47bbbb'
-				        	onTouchTap={this.handleSearchToggle}>
-	      					<SearchIcon />
-	    				</FloatingActionButton>
 			          	<div style={styles.cuisineCustom}>
 			          		<GridList
 			          			cols={1}
@@ -462,25 +442,60 @@ class App extends React.Component {
 						<MenuItem onTouchTap={this.handleMenuClose}>Help</MenuItem>
 						<MenuItem onTouchTap={this.handleMenuClose}>Settings</MenuItem>
 					</Drawer>
-
-					<Drawer
-					    docked={false}
-					    width={200}
-					    zDepth={5}
-					    open={this.state.open}
-					    onRequestChange={(open) => this.handleSearchClose()}
-					>
-						<MenuItem onTouchTap={this.handleSearchClose}></MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>test</MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>test 2</MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>Help</MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>Settings</MenuItem>
-					</Drawer>
 		        </StickyContainer>
 	        </div>
 	      </MuiThemeProvider>
 	    );
 	}
 }
+
+class DrawerSearch extends React.Component{
+	constructor(props, context) {
+		super(props, context);
+		this.handleSearchToggle = this.handleSearchToggle.bind(this);
+		this.state = {
+			open: false,
+		};
+		this.handleSearchClose = this.handleSearchClose.bind(this);
+	}
+
+	handleSearchToggle() {
+		this.setState({
+			open: !this.state.open,
+		});
+	}
+
+	handleSearchClose() {
+		this.setState({
+			open: false,
+		});
+	}
+	render () {
+		return (
+			<div>
+			<FloatingActionButton 
+				        	mini={false} 
+				        	style={styles.searchButton}  
+				        	backgroundColor='#47bbbb'
+				        	onTouchTap={this.handleSearchToggle}>
+	      					<SearchIcon />
+	    				</FloatingActionButton>
+			<Drawer
+					    docked={false}
+					    width={360}
+					    zDepth={5}
+					    open={this.state.open}
+					    onRequestChange={(open) => this.handleSearchClose()}>
+						<Subheader style={styles.subheaderSearch}>Search</Subheader>
+						<MenuItem onTouchTap={this.handleSearchClose}>test</MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>test 2</MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>Help</MenuItem>
+						<MenuItem onTouchTap={this.handleSearchClose}>Help 2</MenuItem>
+					</Drawer>
+			</div>
+		);
+	}
+}
+
 
 export default App;

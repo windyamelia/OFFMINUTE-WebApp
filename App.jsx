@@ -9,14 +9,16 @@ import SwipeableViews from 'react-swipeable-views';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Drawer from 'material-ui/Drawer';
-import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import LocationOn from 'material-ui/svg-icons/communication/location-on';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import AttachMoney from 'material-ui/svg-icons/editor/attach-money';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 function handleTouchTap() {
 	alert('touch on');
@@ -66,20 +68,14 @@ const styles = {
 		boxShadow: 'none',
 	},
 	title: {
-		cursor: 'pointer',
-		fontSize: 15,
+		fontSize: 17,
 		textAlign: 'center',
+		fontWeight: 400,
 	},
 	rightIcon: {
 		margin: '6px 8px 0px -16px',
 		padding: 12,
 		boxSizing: 'border-box',
-	},
-	headline: {
-		fontSize: 24,
-		paddingTop: 16,
-		marginBottom: 12,
-		fontWeight: 400,
 	},
 	tab: {
 		textTransform: 'capitalize',
@@ -200,8 +196,13 @@ const styles = {
 		fontWeight: 100, 
 		fontSize: 14,
 	},
-	subheaderSearch: {
-		textAlign: 'center',
+	menuSearchTitle: {
+		padding: '6px 0',
+		backgroundColor: '#f2f4f7',
+	},
+	nearSearch: {
+		padding: '6px 0',
+		fontSize: 17,
 	},
 };
 
@@ -247,7 +248,6 @@ class App extends React.Component {
 			        	<div style={styles.appbar}>
 					        <AppBar 
 					        	title={<div style={styles.title}>OFFMINUTE</div>}
-					        	onTitleTouchTap={handleTouchTap}
 					        	onLeftIconButtonTouchTap={this.handleMenuToggle}
 					        	zDepth={0}
 					        	iconElementRight={<img src={"images/icon/rightIcon.png"} style={styles.rightIcon} />} />
@@ -434,7 +434,7 @@ class App extends React.Component {
 					    width={200}
 					    zDepth={5}
 					    open={this.state.open}
-					    onRequestChange={(open) => this.handleMenuClose()}
+					    onRequestChange={(open) => this.setState({open})}
 					>
 						<MenuItem onTouchTap={this.handleMenuClose}></MenuItem>
 						<MenuItem onTouchTap={this.handleMenuClose}>My account</MenuItem>
@@ -485,12 +485,14 @@ class DrawerSearch extends React.Component{
 					    width={360}
 					    zDepth={5}
 					    open={this.state.open}
-					    onRequestChange={(open) => this.handleSearchClose()}>
-						<Subheader style={styles.subheaderSearch}>Search</Subheader>
-						<MenuItem onTouchTap={this.handleSearchClose}>test</MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>test 2</MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>Help</MenuItem>
-						<MenuItem onTouchTap={this.handleSearchClose}>Help 2</MenuItem>
+					    onRequestChange={(open) => this.setState({open})}>
+					    <MenuItem onTouchTap={this.handleSearchClose} style={styles.menuSearchTitle} primaryText={<div style={styles.title}>Search</div>} leftIcon={<ArrowBack />}></MenuItem>	
+					    <Divider />
+					    <MenuItem primaryText="Near by" style={styles.nearSearch}></MenuItem>		
+						<MenuItem primaryText="Western"></MenuItem>
+						<MenuItem>test 2</MenuItem>
+						<MenuItem>Help</MenuItem>
+						<MenuItem>Help 2</MenuItem>
 					</Drawer>
 			</div>
 		);

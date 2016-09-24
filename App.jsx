@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {GridList, GridTile} from 'material-ui/GridList';
-import SwipeableViews from 'react-swipeable-views';
+import SwipeableViews from 'react-swipeable-views/lib';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,7 +13,13 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import {Popover, PopoverAnimationVertical} from 'material-ui/Popover';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import LocationOn from 'material-ui/svg-icons/communication/location-on';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
@@ -34,6 +40,9 @@ const muiTheme = getMuiTheme({
   	backgroundColor: '#f2f4f7',
   	textColor: '#000',
   	selectedTextColor: '#47bbbb',
+  },
+  toolbar: {
+  	height: 66,
   },
 });
 
@@ -56,6 +65,11 @@ const tilesData = [
   {
     img: 'images/mexicanMenuEx.png',
     cuisine: 'Mexican',
+    sumRestaurant: '19 Restaurants',
+  },
+  {
+    img: 'images/mexicanMenuEx.png',
+    cuisine: 'tes',
     sumRestaurant: '19 Restaurants',
   },
 ];
@@ -104,6 +118,7 @@ const styles = {
 	    position: 'fixed',
 	    zIndex: 500,
 	    backgroundColor: '#47bbbb',
+	    cursor: 'pointer',
 	},
 	popularCustom: {
 		margin: '0 auto',
@@ -197,12 +212,58 @@ const styles = {
 		fontSize: 14,
 	},
 	menuSearchTitle: {
-		padding: '6px 0',
+		textAlign: 'center',
+		color: '#000',
+		display: 'block',
+		/*padding: '8px 0',*/
 		backgroundColor: '#f2f4f7',
+		fontWeight: 500,
+		fontSize: 17,
 	},
 	nearSearch: {
-		padding: '6px 0',
+		paddingTop: 8,
+		paddingBottom: 8,
 		fontSize: 17,
+	},
+	cuisineSearch: {
+		backgroundColor: '#f7f7f8',
+		fontSize: 17,
+		fontWeight: 500,
+		paddingTop: 3,
+		paddingBottom: 3,
+	},
+	cuisineItemSearch: {
+		fontSize: 15,
+	},
+	toolbarSearch: {
+		display: 'flex',
+		margin: 0,
+	    bottom: 0,
+	    left: 'auto',
+	    position: 'absolute',
+	    zIndex: 500,
+	    width: '100%',
+	    backgroundColor: '#f7f7f8',
+	},
+	flatButtonSearch: {
+		margin: '15px 13px',
+	},
+	labelFlatButtonSearch: {
+		color: '#00bebe',
+		fontSize: 17,
+		textTransform: 'capitalize',
+		fontWeight: 400,
+	},
+	toolbarSeparatorSearch: {
+		top: 7, 
+		height: 53, 
+		marginLeft: 0,
+		color: '#dadae0',
+	},
+	paperSearchLabel: {
+		height: 157,
+		width: 360,	
+		bottom: 0,
 	},
 };
 
@@ -267,7 +328,7 @@ class App extends React.Component {
 			          index={this.state.slideIndex}
 			          onChangeIndex={this.handleChange}
 			        >
-			          <div>
+			          <div style={{height: 684}}>
 			          	<div style={styles.cuisineCustom}>
 			          		<GridList
 			          			cols={1}
@@ -277,7 +338,7 @@ class App extends React.Component {
 			          		>
 			          			{tilesData.map((tile) => (
 			          			<GridTile
-			          				key={tile.img}
+			          				key={tile.cuisine}
 			          				title={<span className="titleGridTile">{tile.cuisine}</span>}
 			          				titleBackground='rgba(255, 255, 255, 0.8)'
 			          				actionIcon={<span className="titleGridTile titleRight">{tile.sumRestaurant}</span>}
@@ -473,31 +534,179 @@ class DrawerSearch extends React.Component{
 	render () {
 		return (
 			<div>
-			<FloatingActionButton 
-				        	mini={false} 
-				        	style={styles.searchButton}  
-				        	backgroundColor='#47bbbb'
-				        	onTouchTap={this.handleSearchToggle}>
-	      					<SearchIcon />
-	    				</FloatingActionButton>
-			<Drawer
-					    docked={false}
-					    width={360}
-					    zDepth={5}
-					    open={this.state.open}
-					    onRequestChange={(open) => this.setState({open})}>
-					    <MenuItem onTouchTap={this.handleSearchClose} style={styles.menuSearchTitle} primaryText={<div style={styles.title}>Search</div>} leftIcon={<ArrowBack />}></MenuItem>	
+				<FloatingActionButton 
+					mini={false} 
+				    style={styles.searchButton}  
+				    backgroundColor='#47bbbb'
+				    onTouchTap={this.handleSearchToggle}>
+	      			<SearchIcon />
+	    		</FloatingActionButton>
+				<Drawer
+					
+				    docked={false}
+					width={360}
+					zDepth={5}
+					open={this.state.open}
+					onRequestChange={(open) => this.setState({open})}>
+
+						<StickyContainer>
+					    {/*<MenuItem onTouchTap={this.handleSearchClose} innerDivStyle={styles.menuSearchTitle} primaryText="Search" leftIcon={<ArrowBack style={{padding:'6px 0'}}/>}></MenuItem>*/}
+					    
+					    <Toolbar noGutter={true} style={{backgroundColor: '#f2f4f7'}}>
+					    		<div style={{textAlign: 'center'}}>
+					    		<ToolbarGroup>
+					    			<IconButton onTouchTap={this.handleSearchClose} style={{padding: '19px 12px'}}>
+					    				<ArrowBack />
+					    			</IconButton>
+					    			<div style={{width:298}}>
+					    				<ToolbarTitle text="Search" style={styles.menuSearchTitle} />
+					    			</div>
+					    		</ToolbarGroup>	
+					    		</div>					    	
+					    	
+					    </Toolbar>
+					    
 					    <Divider />
-					    <MenuItem primaryText="Near by" style={styles.nearSearch}></MenuItem>		
-						<MenuItem primaryText="Western"></MenuItem>
-						<MenuItem>test 2</MenuItem>
-						<MenuItem>Help</MenuItem>
-						<MenuItem>Help 2</MenuItem>
-					</Drawer>
+					    <div style={{width: '100%', overflowY: 'auto'}}>
+					    <MenuItem primaryText="Near by" innerDivStyle={styles.nearSearch} onTouchTap={this.handleSearchClose}></MenuItem>		
+						<MenuItem primaryText="Western" innerDivStyle={styles.cuisineSearch}></MenuItem>
+						<MenuItem primaryText="Steak" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Pizza" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Pasta" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Fast food" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Asian" innerDivStyle={styles.cuisineSearch}></MenuItem>
+						<MenuItem primaryText="Sushi" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Ramen" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+							
+						<MenuItem primaryText="Indian" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Thai Food" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Chinese" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Area" innerDivStyle={styles.cuisineSearch}></MenuItem>
+						<MenuItem primaryText="Dago" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="RE Martidinata" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						<MenuItem primaryText="Setiabudhi" innerDivStyle={styles.cuisineItemSearch}></MenuItem>
+						</div> 
+						<Toolbar style={styles.toolbarSearch}>
+							<ToolbarGroup firstChild={true}>
+								<SearchLabelOnDrawer />
+									<ToolbarSeparator style={styles.toolbarSeparatorSearch}/>
+								<SortLabelOnDrawer />
+									<ToolbarSeparator style={styles.toolbarSeparatorSearch}/>
+								<FilterLabelOnDrawer />
+							</ToolbarGroup>
+						</Toolbar>
+						</StickyContainer>
+
+				</Drawer>
 			</div>
 		);
 	}
 }
 
+class SearchLabelOnDrawer extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+
+		this.handleTouchTap = this.handleTouchTap.bind(this);
+		this.state = {
+			open: false,
+		};
+		this.handleRequestClose = this.handleRequestClose.bind(this);
+	}
+
+	handleTouchTap(event) {
+		event.preventDefault();
+		this.setState({
+			open: true,
+			anchorEl: event.currentTarget,
+		});
+	}
+
+	handleRequestClose() {
+		this.setState({
+			open: false,
+		});
+	}
+
+	render() {
+		return (
+			<div>	
+				<FlatButton 
+					style={styles.flatButtonSearch}
+					label="Search"
+					labelStyle={styles.labelFlatButtonSearch}
+					onTouchTap={this.handleTouchTap} />
+				<Popover
+					open={this.state.open}
+					anchorEl={this.state.anchorEl}
+					anchorOrigin={{vertical:'bottom', horizontal: 'left'}}
+					targetOrigin={{vertical:'bottom', horizontal: 'left'}}
+					onRequestClose={this.handleRequestClose}
+					animation={PopoverAnimationVertical}
+				>
+					<Paper style={styles.paperSearchLabel} zDepth={1}>
+						<div style={{textAlign: 'center', padding: '30px 0'}}>
+							<TextField
+								hintStyle={{position: 'relative', bottom: 0, padding: '12px 0'}}
+								style={{border: '1px solid #c9c9ce', width: 278, height: 48}}
+								underlineShow={false}
+								hintText="Search" />
+							<FlatButton 
+								label="Close"
+								style={{borderRadius: 10}} />
+							<FlatButton 
+								label="Search"
+								style={{borderRadius: 10}} />
+						</div>
+					</Paper>
+				</Popover>
+			</div>
+		);
+	}
+}
+
+class SortLabelOnDrawer extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+
+		this.state = {
+			open: false,
+		};
+	}
+
+	render() {
+		return (
+			<div>
+					
+							
+						<FlatButton style={styles.flatButtonSearch} label="Sort" labelStyle={styles.labelFlatButtonSearch} />
+							
+						
+					
+			</div>
+		);
+	}
+}
+
+class FilterLabelOnDrawer extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+
+		this.state = {
+			open: false,
+		};
+	}
+
+	render() {
+		return (
+			<div>
+					
+							
+						<FlatButton style={styles.flatButtonSearch} label="Filter" labelStyle={styles.labelFlatButtonSearch} />
+					
+			</div>
+		);
+	}
+}
 
 export default App;

@@ -19,6 +19,10 @@ const muiTheme = getMuiTheme({
     textColor: '#000',
     height: 60,
   },
+  menuItem: {
+  	height: 38,
+  	selectedTextColor: 'red',
+  },
   tabs: {
   	backgroundColor: '#f2f4f7',
   	textColor: '#000',

@@ -1,4 +1,6 @@
 import React from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { StickyContainer, Sticky } from 'react-sticky';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton';
@@ -11,9 +13,13 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import FlatButton from 'material-ui/FlatButton';
 import Subheader from 'material-ui/Subheader';
+import SelectField from 'material-ui/SelectField';
 import {Popover, PopoverAnimationVertical} from 'material-ui/Popover';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+import Slider from 'material-ui/Slider';
+import Checklist from 'material-ui/svg-icons/navigation/check';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
 
 const styles = {
 	searchButton: {
@@ -82,6 +88,15 @@ const styles = {
 		width: 360,	
 		bottom: 0,
 	},
+	divPaper: {
+		textAlign: 'center', 
+		padding: '30px 0',
+	},
+	textfield: {
+		border: '1px solid #c9c9ce', 
+		width: 278, 
+		height: 48,
+	},
 	closeButtonOnPaper: {
 		borderRadius: 30, 
 		border: '1px solid #ef7582', 
@@ -97,7 +112,7 @@ const styles = {
 	},
 	searchButtonOnPaper: {
 		borderRadius: 30, 
-		border: '1px solid #36c9c9', 
+		border: '1px solid #00bebe', 
 		lineHeight: '28px', 
 		height: 32,
 		marginLeft: 9,
@@ -106,7 +121,29 @@ const styles = {
 		fontSize: 12,
 		padding: '0 38px',
 		textTransform: 'capitalize',
-		color: '#36c9c9',
+		color: '#00bebe',
+	},
+	subHeader: {
+		textAlign: 'center',
+		color: '#00bebe',
+		fontSize: 17,
+	},
+	subheaderFilter: {
+		fontSize: 15,
+		color: '#696d6f',
+		fontWeight: 400,
+	},
+	labelPopularity: {
+		fontSize: 18,
+		color: '#00bebe',
+		paddingLeft: 3,
+	},
+	iconPopularity: {
+		width: 25,
+		height: 25,
+	},
+	buttonPopularity: {
+		marginLeft: -26,
 	},
 };
 
@@ -133,6 +170,7 @@ class SearchDrawer extends React.Component{
 	}
 	render () {
 		return (
+
 			<div>
 				<FloatingActionButton 
 					mini={false} 
@@ -142,7 +180,6 @@ class SearchDrawer extends React.Component{
 	      			<SearchIcon />
 	    		</FloatingActionButton>
 				<Drawer
-				    docked={false}
 					width={360}
 					zDepth={5}
 					open={this.state.open}
@@ -229,6 +266,7 @@ class SearchOnDrawer extends React.Component {
 
 	render() {
 		return (
+			
 			<div>	
 				<FlatButton 
 					style={styles.flatButtonSearch}
@@ -244,10 +282,10 @@ class SearchOnDrawer extends React.Component {
 					animation={PopoverAnimationVertical}
 				>
 					<Paper style={styles.paperSearchLabel} zDepth={1}>
-						<div style={{textAlign: 'center', padding: '30px 0'}}>
+						<div style={styles.divPaper}>
 							<TextField
 								hintStyle={{left: 113}}
-								style={{border: '1px solid #c9c9ce', width: 278, height: 48}}
+								style={styles.textfield}
 								underlineShow={false}
 								hintText="Search" />
 							<br />
@@ -265,6 +303,7 @@ class SearchOnDrawer extends React.Component {
 					</Paper>
 				</Popover>
 			</div>
+			
 		);
 	}
 }
@@ -296,6 +335,7 @@ class SortOnDrawer extends React.Component {
 
 	render() {
 		return (
+			
 			<div>
 				<FlatButton 
 					style={styles.flatButtonSearch}
@@ -311,11 +351,61 @@ class SortOnDrawer extends React.Component {
 					animation={PopoverAnimationVertical}
 				>
 					<Paper style={styles.paperSearchLabel} zDepth={1}>
-						<div style={{padding: '30px 0'}}>
-							<Subheader style={{textAlign: 'center'}}>Sort</Subheader>
+						<div style={{padding: '10px 0'}}>
+							<Subheader style={styles.subHeader}>Sort</Subheader>
+							<MenuOnSort />
+							<br />
+							<div style={{textAlign: 'center'}}>
+								<FlatButton
+									label="Close"
+									labelStyle={styles.closeLabelOnPaper}
+									style={styles.closeButtonOnPaper}
+									onTouchTap={this.handleRequestClose} />
+							</div>
 						</div>
 					</Paper>
 				</Popover>
+			</div>
+			
+		);
+	}
+}
+
+class MenuOnSort extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+		
+		this.state = {
+			selectedIndex: 0,
+		};
+	}
+
+	select(index) {
+		this.setState({
+			selectedIndex: index
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				
+				<MenuItem 
+								primaryText="Newest"
+								rightIcon={<Checklist />} />
+							<MenuItem 
+								primaryText="Highest Popularity"
+								rightIcon={<Checklist />} />
+							<MenuItem 
+								primaryText="Cheapest Price"
+								rightIcon={<Checklist />} />
+							<MenuItem 
+								primaryText="Nearest"
+								rightIcon={<Checklist />} />
+							<MenuItem 
+								primaryText="Highest Discount"
+								rightIcon={<Checklist />} />
+				
 			</div>
 		);
 	}
@@ -325,18 +415,132 @@ class FilterOnDrawer extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 
+		this.handleTouchTap = this.handleTouchTap.bind(this);
 		this.state = {
 			open: false,
 		};
+		this.handleRequestClose = this.handleRequestClose.bind(this);
+	}
+
+	handleTouchTap(event) {
+		event.preventDefault();
+		this.setState({
+			open: true,
+			anchorEl: event.currentTarget,
+		});
+	}
+
+	handleRequestClose() {
+		this.setState({
+			open: false,
+		});
 	}
 
 	render() {
 		return (
 			<div>
-					
-							
-						<FlatButton style={styles.flatButtonSearch} label="Filter" labelStyle={styles.labelFlatButtonSearch} />
-					
+				<FlatButton 
+					style={styles.flatButtonSearch}
+					label="Filter" 
+					labelStyle={styles.labelFlatButtonSearch}
+					onTouchTap={this.handleTouchTap} />
+				<Popover
+					open={this.state.open}
+					anchorEl={this.state.anchorEl}
+					anchorOrigin={{vertical:'bottom', horizontal: 'left'}}
+					targetOrigin={{vertical:'bottom', horizontal: 'left'}}
+					onRequestClose={this.handleRequestClose}
+					animation={PopoverAnimationVertical}
+				>
+					<Paper style={styles.paperSearchLabel} zDepth={1}>
+						<div style={{padding: '10px 0 20px'}}>
+							<Subheader style={styles.subHeader}>Filter</Subheader>
+							<div>
+								<Subheader style={styles.subheaderFilter}>Discount</Subheader>
+								<SliderOnSortFilter />
+							</div>
+							<div>
+								<Subheader style={styles.subheaderFilter}>Popularity</Subheader>
+								<FlatButton
+						 			label="1"
+						 			labelStyle={styles.labelPopularity}
+						   			icon={<ActionGrade style={styles.iconPopularity} color="#00bebe" />} 
+						   			style={{marginLeft: 12}} />
+						   		<FlatButton
+						 			label="2"
+						   			labelStyle={styles.labelPopularity}
+						   			icon={<ActionGrade style={styles.iconPopularity} color="#00bebe" />} 
+						   			style={styles.buttonPopularity} />
+						   		<FlatButton
+						 			label="3"
+						   			labelStyle={styles.labelPopularity}
+						   			icon={<ActionGrade style={styles.iconPopularity} color="#00bebe" />} 
+						   			style={styles.buttonPopularity} />
+						   		<FlatButton
+						 			label="4"
+						   			labelStyle={styles.labelPopularity}
+						   			icon={<ActionGrade style={styles.iconPopularity} color="#00bebe" />} 
+						   			style={styles.buttonPopularity} />
+						   		<FlatButton
+						 			label="5"
+						   			labelStyle={styles.labelPopularity}
+						   			icon={<ActionGrade style={styles.iconPopularity} color="#00bebe" />} 
+						   			style={styles.buttonPopularity} />
+							</div>
+							<br />
+							<br />
+							<div style={{textAlign: 'center'}}>
+								<FlatButton
+									label="Close"
+									labelStyle={styles.closeLabelOnPaper}
+									style={styles.closeButtonOnPaper}
+									onTouchTap={this.handleRequestClose} />
+								<FlatButton 
+									label="Apply Filter"
+									labelStyle={styles.searchLabelOnPaper}
+									style={styles.searchButtonOnPaper} />
+							</div>
+						</div>
+					</Paper>
+				</Popover>
+			</div>
+		);
+	}
+}
+
+class SliderOnSortFilter extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+		this.handleFirstSlider = this.handleFirstSlider.bind(this);
+		this.state = {
+			firstSlider: 0.5,
+			secondSlider: 50,
+		}
+	}
+
+	handleFirstSlider(event, value) {
+		this.setState({
+			firstSlider: value,
+		});
+	}
+
+	handleSecondSlider(event, value) {
+		this.setState({
+			secondSlider: value,
+		});
+	}
+
+	render () {
+		return (
+			<div style={{margin: '0 16px'}}>
+				<Slider
+					min={0}
+					max={100}
+					step={1}
+					defaultValue={50}
+					value={this.state.secondSlider}
+					onChange={this.handleSecondSlider.bind(this)}
+					sliderStyle={{marginTop: 12, marginBottom: 24}} />
 			</div>
 		);
 	}

@@ -1,0 +1,116 @@
+import React from 'react';
+import FlatButton from 'material-ui/FlatButton';
+import {Popover, PopoverAnimationVertical} from 'material-ui/Popover';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+
+const styles = {
+	flatButtonSearch: {
+		margin: '15px 13px',
+	},
+	labelFlatButtonSearch: {
+		color: '#00bebe',
+		fontSize: 17,
+		textTransform: 'capitalize',
+		fontWeight: 400,
+	},
+	paperSearchLabel: {
+		width: 360,	
+		bottom: 0,
+	},
+	closeButtonOnPaper: {
+		borderRadius: 30, 
+		border: '1px solid #ef7582', 
+		lineHeight: '28px', 
+		height: 32,
+		marginRight: 9,
+	},
+	closeLabelOnPaper: {
+		fontSize: 12,
+		padding: '0 38px',
+		textTransform: 'capitalize',
+		color: '#ef7582',
+	},
+	searchButtonOnPaper: {
+		borderRadius: 30, 
+		border: '1px solid #36c9c9', 
+		lineHeight: '28px', 
+		height: 32,
+		marginLeft: 9,
+	},
+	searchLabelOnPaper: {
+		fontSize: 12,
+		padding: '0 38px',
+		textTransform: 'capitalize',
+		color: '#36c9c9',
+	},
+};
+
+class SearchOnDrawer extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+
+		this.handleTouchTap = this.handleTouchTap.bind(this);
+		this.state = {
+			open: false,
+		};
+		this.handleRequestClose = this.handleRequestClose.bind(this);
+	}
+
+	handleTouchTap(event) {
+		event.preventDefault();
+		this.setState({
+			open: true,
+			anchorEl: event.currentTarget,
+		});
+	}
+
+	handleRequestClose() {
+		this.setState({
+			open: false,
+		});
+	}
+
+	render() {
+		return (
+			<div>	
+				<FlatButton 
+					style={styles.flatButtonSearch}
+					label="Search"
+					labelStyle={styles.labelFlatButtonSearch}
+					onTouchTap={this.handleTouchTap} />
+				<Popover
+					open={this.state.open}
+					anchorEl={this.state.anchorEl}
+					anchorOrigin={{vertical:'bottom', horizontal: 'left'}}
+					targetOrigin={{vertical:'bottom', horizontal: 'left'}}
+					onRequestClose={this.handleRequestClose}
+					animation={PopoverAnimationVertical}
+				>
+					<Paper style={styles.paperSearchLabel} zDepth={1}>
+						<div style={{textAlign: 'center', padding: '30px 0'}}>
+							<TextField
+								hintStyle={{left: 113}}
+								style={{border: '1px solid #c9c9ce', width: 278, height: 48}}
+								underlineShow={false}
+								hintText="Search" />
+							<br />
+							<br />
+							<FlatButton
+								label="Close"
+								labelStyle={styles.closeLabelOnPaper}
+								style={styles.closeButtonOnPaper}
+								onTouchTap={this.handleRequestClose} />
+							<FlatButton 
+								label="Search"
+								labelStyle={styles.searchLabelOnPaper}
+								style={styles.searchButtonOnPaper} />
+						</div>
+					</Paper>
+				</Popover>
+			</div>
+		);
+	}
+}
+
+export default SearchOnDrawer;

@@ -261,9 +261,34 @@ const styles = {
 		color: '#dadae0',
 	},
 	paperSearchLabel: {
-		height: 157,
 		width: 360,	
 		bottom: 0,
+	},
+	closeButtonOnPaper: {
+		borderRadius: 30, 
+		border: '1px solid #ef7582', 
+		lineHeight: '28px', 
+		height: 32,
+		marginRight: 9,
+	},
+	closeLabelOnPaper: {
+		fontSize: 12,
+		padding: '0 38px',
+		textTransform: 'capitalize',
+		color: '#ef7582',
+	},
+	searchButtonOnPaper: {
+		borderRadius: 30, 
+		border: '1px solid #36c9c9', 
+		lineHeight: '28px', 
+		height: 32,
+		marginLeft: 9,
+	},
+	searchLabelOnPaper: {
+		fontSize: 12,
+		padding: '0 38px',
+		textTransform: 'capitalize',
+		color: '#36c9c9',
 	},
 };
 
@@ -647,16 +672,20 @@ class SearchLabelOnDrawer extends React.Component {
 					<Paper style={styles.paperSearchLabel} zDepth={1}>
 						<div style={{textAlign: 'center', padding: '30px 0'}}>
 							<TextField
-								hintStyle={{position: 'relative', bottom: 0, padding: '12px 0'}}
+								hintStyle={{left: 113}}
 								style={{border: '1px solid #c9c9ce', width: 278, height: 48}}
 								underlineShow={false}
 								hintText="Search" />
-							<FlatButton 
+							<br />
+							<br />
+							<FlatButton
 								label="Close"
-								style={{borderRadius: 10}} />
+								labelStyle={styles.closeLabelOnPaper}
+								style={styles.closeButtonOnPaper} />
 							<FlatButton 
 								label="Search"
-								style={{borderRadius: 10}} />
+								labelStyle={styles.searchLabelOnPaper}
+								style={styles.searchButtonOnPaper} />
 						</div>
 					</Paper>
 				</Popover>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Bookings from './Bookings.jsx';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/Menu';
@@ -10,11 +11,6 @@ const styles = {
 		fontSize: 17,
 		textAlign: 'center',
 		fontWeight: 400,
-	},
-	rightIcon: {
-		margin: '6px 8px 0px -16px',
-		padding: 12,
-		boxSizing: 'border-box',
 	},
 };
 
@@ -47,7 +43,7 @@ class AppBarCustom extends React.Component {
 					title={<div style={styles.title}>OFFMINUTE</div>}
 					onLeftIconButtonTouchTap={this.handleMenuToggle}
 					zDepth={0}
-					iconElementRight={<img src={"images/icon/rightIcon.png"} style={styles.rightIcon} />} />
+					iconElementRight={<Bookings />} />
 				<Drawer
 				    docked={false}
 				    width={200}

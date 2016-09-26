@@ -190,16 +190,15 @@ class SearchDrawer extends React.Component{
 					    
 					    <Toolbar noGutter={true} style={{backgroundColor: '#f2f4f7'}}>
 					    		<div style={{textAlign: 'center'}}>
-					    		<ToolbarGroup>
-					    			<IconButton onTouchTap={this.handleSearchClose} style={{padding: '19px 12px'}}>
-					    				<ArrowBack />
-					    			</IconButton>
-					    			<div style={{width:298}}>
-					    				<ToolbarTitle text="Search" style={styles.menuSearchTitle} />
-					    			</div>
-					    		</ToolbarGroup>	
+						    		<ToolbarGroup>
+						    			<IconButton onTouchTap={this.handleSearchClose} style={{padding: '19px 12px'}}>
+						    				<ArrowBack />
+						    			</IconButton>
+						    			<div style={{width:298}}>
+						    				<ToolbarTitle text="Search" style={styles.menuSearchTitle} />
+						    			</div>
+						    		</ToolbarGroup>	
 					    		</div>					    	
-					    	
 					    </Toolbar>
 					    
 					    <Divider />

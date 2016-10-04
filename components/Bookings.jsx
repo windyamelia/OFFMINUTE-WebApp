@@ -1,6 +1,9 @@
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import FlatButton from 'material-ui/FlatButton';
+import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
@@ -19,6 +22,23 @@ const styles = {
 		fontWeight: 500,
 		fontSize: 17,
 	},
+	recentSubheader: {
+		fontSize: 17,
+		color: '#000',
+		fontWeight: 400,
+		paddingTop: 12, 
+		paddingBottom: 12,
+	},
+	gridListRoot: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
+	},
+	gridListBookings: {
+		width: 480,
+		overflowY: 'auto',
+		margin: 0,
+	}
 };
 
 class Bookings extends React.Component {
@@ -67,8 +87,55 @@ class Bookings extends React.Component {
 					    	</ToolbarGroup>	
 					    </div>					    		
 					</Toolbar>
-					<Subheader>Recents</Subheader>
-
+					<Subheader style={styles.recentSubheader}>Recent</Subheader>
+					<Divider />
+					<div style={{width: '100%', padding: '14px 0'}}>
+						<div style={{width: '40%', display: 'inline-block'}}>
+							<div style={{margin: '0 14px'}}>
+								<img src={'images/bookings-picture.png'} />							
+							</div>
+						</div>
+						<div style={{width: '60%', display: 'inline-block'}}>
+							<span style={{fontSize: 17, fontWeight: 500}}>Sushi Tei</span>
+							<span style={{fontSize: 10, marginLeft: 6}}>Jl. Sumatra No. 1</span>
+							<p style={{margin: '6px 0', fontSize: 13, fontWeight: 300}}>2 person</p>
+							<p style={{margin: '6px 0 22px', fontSize: 13, fontWeight: 300}}>May, 29 2016 14.00</p>
+							<FlatButton
+								label="Cancel"
+								backgroundColor="#ed5564"
+								labelStyle={{color: '#fff', textTransform: 'capitalize', fontSize: 10, fontWeight: 400}}
+								style={{borderRadius: 30, lineHeight: '28px', height: 28, minWidth: 74}} />
+							<FlatButton 
+								label="Make a call"
+								backgroundColor="#00bebe"
+								labelStyle={{color: '#fff', textTransform: 'capitalize', fontSize: 10, fontWeight: 400}}
+								style={{borderRadius: 30, lineHeight: '28px', height: 28, minWidth: 74, marginLeft: 9}} />
+						</div>
+					</div>
+					<Divider />
+					<div style={{width: '100%', padding: '14px 0'}}>
+						<div style={{width: '40%', display: 'inline-block'}}>
+							<div style={{margin: '0 14px'}}>
+								<img src={'images/bookings-picture.png'} />							
+							</div>
+						</div>
+						<div style={{width: '60%', display: 'inline-block'}}>
+							<span style={{fontSize: 17, fontWeight: 500}}>Sushi Tei</span>
+							<span style={{fontSize: 10, marginLeft: 6}}>Jl. Sumatra No. 1</span>
+							<p style={{margin: '6px 0', fontSize: 13, fontWeight: 300}}>2 person</p>
+							<p style={{margin: '6px 0 22px', fontSize: 13, fontWeight: 300}}>May, 29 2016 14.00</p>
+							<FlatButton
+								label="Cancel"
+								backgroundColor="#ed5564"
+								labelStyle={{color: '#fff', textTransform: 'capitalize', fontSize: 10, fontWeight: 400}}
+								style={{borderRadius: 30, lineHeight: '28px', height: 28, minWidth: 74}} />
+							<FlatButton 
+								label="Make a call"
+								backgroundColor="#00bebe"
+								labelStyle={{color: '#fff', textTransform: 'capitalize', fontSize: 10, fontWeight: 400}}
+								style={{borderRadius: 30, lineHeight: '28px', height: 28, minWidth: 74, marginLeft: 9}} />
+						</div>
+					</div>
 				</Drawer>
 			</div>
 		);

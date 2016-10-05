@@ -90,16 +90,16 @@ class Bookings extends React.Component {
 					<Subheader style={styles.recentSubheader}>Recent</Subheader>
 					<Divider />
 					<div style={{width: '100%', padding: '14px 0'}}>
-						<div style={{width: '40%', display: 'inline-block'}}>
-							<div style={{margin: '0 14px'}}>
+						<div style={{position: 'relative', width: '40%', display: 'inline-block'}}>
+							<div style={{textAlign: 'center'}}>
 								<img src={'images/bookings-picture.png'} />							
 							</div>
 						</div>
-						<div style={{width: '60%', display: 'inline-block'}}>
+						<div style={{position: 'relative', width: '60%', display: 'inline-block'}}>
 							<span style={{fontSize: 17, fontWeight: 500}}>Sushi Tei</span>
 							<span style={{fontSize: 10, marginLeft: 6}}>Jl. Sumatra No. 1</span>
 							<p style={{margin: '6px 0', fontSize: 13, fontWeight: 300}}>2 person</p>
-							<p style={{margin: '6px 0 22px', fontSize: 13, fontWeight: 300}}>May, 29 2016 14.00</p>
+							<p style={{margin: '6px 0 20px', fontSize: 13, fontWeight: 300}}>May, 29 2016 14.00</p>
 							<FlatButton
 								label="Cancel"
 								backgroundColor="#ed5564"
@@ -114,16 +114,16 @@ class Bookings extends React.Component {
 					</div>
 					<Divider />
 					<div style={{width: '100%', padding: '14px 0'}}>
-						<div style={{width: '40%', display: 'inline-block'}}>
-							<div style={{margin: '0 14px'}}>
+						<div style={{position: 'relative', width: '40%', display: 'inline-block'}}>
+							<div style={{textAlign: 'center'}}>
 								<img src={'images/bookings-picture.png'} />							
 							</div>
 						</div>
-						<div style={{width: '60%', display: 'inline-block'}}>
+						<div style={{position: 'relative', width: '60%', display: 'inline-block'}}>
 							<span style={{fontSize: 17, fontWeight: 500}}>Sushi Tei</span>
 							<span style={{fontSize: 10, marginLeft: 6}}>Jl. Sumatra No. 1</span>
 							<p style={{margin: '6px 0', fontSize: 13, fontWeight: 300}}>2 person</p>
-							<p style={{margin: '6px 0 22px', fontSize: 13, fontWeight: 300}}>May, 29 2016 14.00</p>
+							<p style={{margin: '6px 0 20px', fontSize: 13, fontWeight: 300}}>May, 29 2016 14.00</p>
 							<FlatButton
 								label="Cancel"
 								backgroundColor="#ed5564"

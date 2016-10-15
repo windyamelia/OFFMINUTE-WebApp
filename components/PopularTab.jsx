@@ -1,7 +1,13 @@
 import React from 'react';
+import ProductDetail from './ProductDetail.jsx'
 import FlatButton from 'material-ui/FlatButton';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import LocationOn from 'material-ui/svg-icons/communication/location-on';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 const popular1 = 'images/popular1.png';
 
@@ -43,7 +49,7 @@ const styles = {
 		margin: 0,
 	},
 	banner: {
-		height: 86,
+		height: 95,
 		backgroundColor: '#fff',
 		maxWidth: 480,
 		margin: '6px 0',
@@ -64,10 +70,7 @@ const styles = {
 		height: 20,
 	},
 	bannerTitle: {
-		marginTop: 0,
-		marginBottom: 0,
-		fontSize: 20,
-		fontWeight: 400,
+		height: 32,
 	},
 	address: {
 		marginBottom: 0,
@@ -97,9 +100,28 @@ const styles = {
 		fontWeight: 100, 
 		fontSize: 14,
 	},
+	grade: {
+		marginTop: 6,
+	},
+	labelBanner: {
+		textTransform: 'capitalize', 
+		fontSize: 18, 
+		fontWeight: 400, 
+		paddingLeft: 0,
+	},
+	menuSearchTitle: {
+		textAlign: 'center',
+		color: '#000',
+		display: 'block',
+		/*padding: '8px 0',*/
+		backgroundColor: '#f2f4f7',
+		fontWeight: 500,
+		fontSize: 17,
+	},
 };
 
 class PopularTab extends React.Component {
+
 	render() {
 		return (
 			<div>
@@ -118,7 +140,7 @@ class PopularTab extends React.Component {
 				    </div>
 					<div style={styles.banner}>
 					   	<div style={styles.bannerLeft}>
-					   		<h5 style={styles.bannerTitle}>Sushi Tei</h5>
+					   		<ProductDetail />
 					   		<p style={styles.address}>Jl. Sumatera No. 1</p>
 					   		<FlatButton
 					 			label="1.54 km"
@@ -163,7 +185,10 @@ class PopularTab extends React.Component {
 				  	</div>
 				    <div style={styles.banner}>
 				      	<div style={styles.bannerLeft}>
-				       		<h5 style={styles.bannerTitle}>Sushi Tei</h5>
+				       		<FlatButton
+					   			label="Sushi Tei"
+					   			labelStyle={styles.labelBanner}
+					   			style={styles.bannerTitle} />
 				      		<p style={styles.address}>Jl. Sumatera No. 1</p>
 				       		<FlatButton
 				       			label="1.54 km"
@@ -208,7 +233,10 @@ class PopularTab extends React.Component {
 				   	</div>
 				    <div style={styles.banner}>
 				      	<div style={styles.bannerLeft}>
-				      		<h5 style={styles.bannerTitle}>Sushi Tei</h5>
+				      		<FlatButton
+					   			label="Sushi Tei"
+					   			labelStyle={styles.labelBanner}
+					   			style={styles.bannerTitle} />
 				      		<p style={styles.address}>Jl. Sumatera No. 1</p>
 				       		<FlatButton
 				       			label="1.54 km"
@@ -238,6 +266,55 @@ class PopularTab extends React.Component {
 					   	</div>
 					</div>
 				</div>
+				<div style={styles.popularCustom}>
+				   	<div style={styles.popular1}>
+				   		<ul style={styles.ulCircleBanner}>
+				   			<li style={styles.circleBanner}>
+				           		<p style={styles.percentage}>-20%</p>
+				          		<p style={styles.timeDisc}>15.00-20.00</p>
+				           	</li>
+				          	<li style={styles.circleBanner}>
+				           		<p style={styles.percentage}>-30%</p>
+				           		<p style={styles.timeDisc}>15.00-20.00</p>
+				           	</li>
+				        </ul>
+				   	</div>
+				    <div style={styles.banner}>
+				      	<div style={styles.bannerLeft}>
+				      		<FlatButton
+					   			label="Sushi Tei"
+					   			labelStyle={styles.labelBanner}
+					   			style={styles.bannerTitle} />
+				      		<p style={styles.address}>Jl. Sumatera No. 1</p>
+				       		<FlatButton
+				       			label="1.54 km"
+				      			labelStyle={styles.distance}
+				       			icon={<LocationOn />}
+				       			style={{marginLeft: -15}} />
+				      	</div>
+				       	<div style={styles.bannerRight}>
+				       		<div style={styles.grade}>
+				          		<ActionGrade style={styles.starIcon}  color={'#00bebe'}/>
+				           		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+				           		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+				           		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+				           		<ActionGrade style={styles.starIcon} color={'#00bebe'}/>
+				           	</div>
+					       	<div>
+					       		<span style={styles.wordSpace} id="blueMoney">$ $ $ </span>
+					       		<span style={styles.wordSpace} id="greyMoney">$ $ $</span>
+					       	</div>
+					       	<div style={styles.bannerButton}>
+					       		<FlatButton
+					       			backgroundColor="#ed5564"
+					       			label="Add to Favorite"
+					       			style={styles.favButton}
+					       			labelStyle={styles.labelFavButton} />
+					       	</div>
+					   	</div>
+					</div>
+				</div>
+
 			</div>
 		);
 	}
